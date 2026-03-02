@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de emissão de CO2 para diferentes tipos de veículos">
+    <title>Calculadora de Emissão de CO2</title>
+    <link rel="stylesheet" href="Style/style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Calculadora de Emissão de CO2</h1>
+            <p class="header__subtitle">Calcule as emissões da sua viagem e compare diferentes meios de transporte</p>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- SEÇÃO: Seleção de Veículo -->
+            <section class="vehicle-selection" aria-label="Seleção de tipo de veículo">
+                <h2 class="section__title">Escolha o Tipo de Veículo</h2>
+                <div class="vehicle-grid" id="vehicleGrid">
+                    <!-- JS irá popular ou adicionar interatividade -->
+                    <div class="vehicle-card" data-vehicle="carro">
+                        <div class="vehicle-card__icon">🚗</div>
+                        <h3 class="vehicle-card__name">Carro</h3>
+                        <input type="radio" name="vehicle" id="vehicle-carro" value="carro" class="vehicle-card__input">
+                    </div>
+                    
+                    <div class="vehicle-card" data-vehicle="moto">
+                        <div class="vehicle-card__icon">🏍️</div>
+                        <h3 class="vehicle-card__name">Moto</h3>
+                        <input type="radio" name="vehicle" id="vehicle-moto" value="moto" class="vehicle-card__input">
+                    </div>
+                    
+                    <div class="vehicle-card" data-vehicle="onibus">
+                        <div class="vehicle-card__icon">🚌</div>
+                        <h3 class="vehicle-card__name">Ônibus</h3>
+                        <input type="radio" name="vehicle" id="vehicle-onibus" value="onibus" class="vehicle-card__input">
+                    </div>
+                    
+                    <div class="vehicle-card" data-vehicle="aviao">
+                        <div class="vehicle-card__icon">✈️</div>
+                        <h3 class="vehicle-card__name">Avião</h3>
+                        <input type="radio" name="vehicle" id="vehicle-aviao" value="aviao" class="vehicle-card__input">
+                    </div>
+                    
+                    <div class="vehicle-card" data-vehicle="trem">
+                        <div class="vehicle-card__icon">🚆</div>
+                        <h3 class="vehicle-card__name">Trem</h3>
+                        <input type="radio" name="vehicle" id="vehicle-trem" value="trem" class="vehicle-card__input">
+                    </div>
+                    
+                    <div class="vehicle-card" data-vehicle="bicicleta">
+                        <div class="vehicle-card__icon">🚲</div>
+                        <h3 class="vehicle-card__name">Bicicleta</h3>
+                        <input type="radio" name="vehicle" id="vehicle-bicicleta" value="bicicleta" class="vehicle-card__input">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: Origem e Destino -->
+            <section class="route-input" aria-label="Informações de origem e destino">
+                <h2 class="section__title">Defina sua Rota</h2>
+                <form class="route-form" id="routeForm">
+                    <div class="form-group">
+                        <label for="origin" class="form-label">
+                            <span class="form-label__icon">📍</span>
+                            Ponto de Origem
+                        </label>
+                        <input 
+                            type="text" 
+                            id="origin" 
+                            name="origin" 
+                            class="form-input" 
+                            placeholder="Digite o endereço de origem"
+                            required
+                            aria-required="true"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destination" class="form-label">
+                            <span class="form-label__icon">🎯</span>
+                            Ponto Final
+                        </label>
+                        <input 
+                            type="text" 
+                            id="destination" 
+                            name="destination" 
+                            class="form-input" 
+                            placeholder="Digite o endereço de destino"
+                            required
+                            aria-required="true"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="distance" class="form-label">
+                            <span class="form-label__icon">📏</span>
+                            Distância (km)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="distance" 
+                            name="distance" 
+                            class="form-input" 
+                            placeholder="Distância será calculada automaticamente"
+                            min="0"
+                            step="0.1"
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary" id="calculateBtn">
+                        Calcular Emissões
+                    </button>
+                </form>
+            </section>
+
+            <!-- SEÇÃO: Resultados -->
+            <section class="results" id="resultsSection" aria-label="Resultados do cálculo" hidden>
+                <h2 class="section__title">Resultado da Emissão de CO2</h2>
+                <div class="results-content">
+                    <div class="result-card result-card--main">
+                        <div class="result-card__icon">🌍</div>
+                        <h3 class="result-card__title">Emissão Total</h3>
+                        <p class="result-card__value" id="totalEmission">
+                            <span class="result-card__number">0</span>
+                            <span class="result-card__unit">kg CO2</span>
+                        </p>
+                        <p class="result-card__description" id="emissionDescription">
+                            <!-- JS irá adicionar descrição contextual -->
+                        </p>
+                    </div>
+                    
+                    <div class="result-stats">
+                        <div class="stat-item">
+                            <span class="stat-item__label">Veículo selecionado:</span>
+                            <span class="stat-item__value" id="selectedVehicle">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-item__label">Distância percorrida:</span>
+                            <span class="stat-item__value" id="travelDistance">-</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: Créditos de Carbono -->
+            <section class="carbon-credits" id="carbonCreditsSection" aria-label="Créditos de carbono necessários" hidden>
+                <h2 class="section__title">Créditos de Carbono</h2>
+                <div class="carbon-credits-content">
+                    <div class="credits-info">
+                        <p class="credits-info__text">
+                            Para neutralizar as emissões desta viagem, você precisaria de:
+                        </p>
+                        <div class="credits-amount">
+                            <span class="credits-amount__value" id="creditsNeeded">0</span>
+                            <span class="credits-amount__unit">créditos de carbono</span>
+                        </div>
+                    </div>
+                    
+                    <div class="credits-equivalence">
+                        <h3 class="credits-equivalence__title">Isso equivale a:</h3>
+                        <ul class="equivalence-list" id="equivalenceList">
+                            <!-- JS irá popular com equivalências (árvores plantadas, etc) -->
+                            <li class="equivalence-item">
+                                <span class="equivalence-item__icon">🌳</span>
+                                <span class="equivalence-item__text" id="treesEquivalent">- árvores plantadas</span>
+                            </li>
+                            <li class="equivalence-item">
+                                <span class="equivalence-item__icon">⚡</span>
+                                <span class="equivalence-item__text" id="energyEquivalent">- kWh de energia renovável</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: Comparação de Veículos -->
+            <section class="vehicle-comparison" id="comparisonSection" aria-label="Comparação entre veículos" hidden>
+                <h2 class="section__title">Compare com Outros Veículos</h2>
+                <p class="section__description">
+                    Veja como sua escolha se compara com outros meios de transporte para a mesma rota
+                </p>
+                
+                <div class="comparison-chart" id="comparisonChart">
+                    <!-- JS irá gerar gráfico ou lista de comparação -->
+                    <div class="comparison-table">
+                        <table class="table" role="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Veículo</th>
+                                    <th scope="col">Emissão (kg CO2)</th>
+                                    <th scope="col">Diferença</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparisonTableBody">
+                                <!-- JS irá popular as linhas -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="comparison-insights" id="comparisonInsights">
+                    <!-- JS irá adicionar insights sobre a melhor escolha -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer__project">
+                    Projeto de curso <strong>GitHub Copilot</strong> - DIO
+                </p>
+                <p class="footer__date">
+                    <time datetime="2026-03-02" id="currentDate">
+                        Março de 2026
+                    </time>
+                </p>
+            </div>
+            <p class="footer__credits">
+                Desenvolvido com 💚 para um mundo mais sustentável
+            </p>
+        </div>
+    </footer>
+
+    <!-- Link para JavaScript será adicionado aqui -->
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
