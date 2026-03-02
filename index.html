@@ -25,41 +25,41 @@
                 <h2 class="section__title">Escolha o Tipo de Veículo</h2>
                 <div class="vehicle-grid" id="vehicleGrid">
                     <!-- JS irá popular ou adicionar interatividade -->
-                    <div class="vehicle-card" data-vehicle="carro">
+                    <label class="vehicle-card" data-vehicle="carro">
+                        <input type="radio" name="vehicle" id="vehicle-carro" value="carro" class="vehicle-card__input">
                         <div class="vehicle-card__icon">🚗</div>
                         <h3 class="vehicle-card__name">Carro</h3>
-                        <input type="radio" name="vehicle" id="vehicle-carro" value="carro" class="vehicle-card__input">
-                    </div>
+                    </label>
                     
-                    <div class="vehicle-card" data-vehicle="moto">
+                    <label class="vehicle-card" data-vehicle="moto">
+                        <input type="radio" name="vehicle" id="vehicle-moto" value="moto" class="vehicle-card__input">
                         <div class="vehicle-card__icon">🏍️</div>
                         <h3 class="vehicle-card__name">Moto</h3>
-                        <input type="radio" name="vehicle" id="vehicle-moto" value="moto" class="vehicle-card__input">
-                    </div>
+                    </label>
                     
-                    <div class="vehicle-card" data-vehicle="onibus">
+                    <label class="vehicle-card" data-vehicle="onibus">
+                        <input type="radio" name="vehicle" id="vehicle-onibus" value="onibus" class="vehicle-card__input">
                         <div class="vehicle-card__icon">🚌</div>
                         <h3 class="vehicle-card__name">Ônibus</h3>
-                        <input type="radio" name="vehicle" id="vehicle-onibus" value="onibus" class="vehicle-card__input">
-                    </div>
+                    </label>
                     
-                    <div class="vehicle-card" data-vehicle="aviao">
+                    <label class="vehicle-card" data-vehicle="aviao">
+                        <input type="radio" name="vehicle" id="vehicle-aviao" value="aviao" class="vehicle-card__input">
                         <div class="vehicle-card__icon">✈️</div>
                         <h3 class="vehicle-card__name">Avião</h3>
-                        <input type="radio" name="vehicle" id="vehicle-aviao" value="aviao" class="vehicle-card__input">
-                    </div>
+                    </label>
                     
-                    <div class="vehicle-card" data-vehicle="trem">
+                    <label class="vehicle-card" data-vehicle="trem">
+                        <input type="radio" name="vehicle" id="vehicle-trem" value="trem" class="vehicle-card__input">
                         <div class="vehicle-card__icon">🚆</div>
                         <h3 class="vehicle-card__name">Trem</h3>
-                        <input type="radio" name="vehicle" id="vehicle-trem" value="trem" class="vehicle-card__input">
-                    </div>
+                    </label>
                     
-                    <div class="vehicle-card" data-vehicle="bicicleta">
+                    <label class="vehicle-card" data-vehicle="bicicleta">
+                        <input type="radio" name="vehicle" id="vehicle-bicicleta" value="bicicleta" class="vehicle-card__input">
                         <div class="vehicle-card__icon">🚲</div>
                         <h3 class="vehicle-card__name">Bicicleta</h3>
-                        <input type="radio" name="vehicle" id="vehicle-bicicleta" value="bicicleta" class="vehicle-card__input">
-                    </div>
+                    </label>
                 </div>
             </section>
 
@@ -119,6 +119,31 @@
                         Calcular Emissões
                     </button>
                 </form>
+                
+                <!-- Rotas Populares -->
+                <div class="popular-routes" id="popularRoutes">
+                    <h3 class="popular-routes__title">📍 Rotas Populares - Clique para preencher:</h3>
+                    <div class="popular-routes__grid">
+                        <button type="button" class="route-chip" data-origin="Recife, PE" data-destination="João Pessoa, PB" data-distance="120">
+                            Recife → João Pessoa <span class="route-chip__distance">120 km</span>
+                        </button>
+                        <button type="button" class="route-chip" data-origin="Fortaleza, CE" data-destination="Natal, RN" data-distance="537">
+                            Fortaleza → Natal <span class="route-chip__distance">537 km</span>
+                        </button>
+                        <button type="button" class="route-chip" data-origin="Salvador, BA" data-destination="Aracaju, SE" data-distance="356">
+                            Salvador → Aracaju <span class="route-chip__distance">356 km</span>
+                        </button>
+                        <button type="button" class="route-chip" data-origin="Recife, PE" data-destination="Maceió, AL" data-distance="285">
+                            Recife → Maceió <span class="route-chip__distance">285 km</span>
+                        </button>
+                        <button type="button" class="route-chip" data-origin="Natal, RN" data-destination="João Pessoa, PB" data-distance="185">
+                            Natal → João Pessoa <span class="route-chip__distance">185 km</span>
+                        </button>
+                        <button type="button" class="route-chip" data-origin="Fortaleza, CE" data-destination="Teresina, PI" data-distance="634">
+                            Fortaleza → Teresina <span class="route-chip__distance">634 km</span>
+                        </button>
+                    </div>
+                </div>
             </section>
 
             <!-- SEÇÃO: Resultados -->
@@ -233,7 +258,6 @@
         </div>
     </footer>
 
-    <!-- Link para JavaScript será adicionado aqui -->
-    <!-- <script src="script.js"></script> -->
+    <script src="javascript/script.js"></script>
 </body>
 </html>
